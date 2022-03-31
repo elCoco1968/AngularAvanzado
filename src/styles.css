@@ -1,1 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+/*TODO: Tener en cuenta que este estilo lo sacamos de nuestros assets, TODO: Del css -> style.css, lo buscamos en
+la ruta de animados, y el primero*/
+.fast{
+    -webkit-animation-duration:.3s;
+    animation-duration:.3s;
+    -webkit-animation-fill-mode:both;
+    animation-fill-mode:both
+}
