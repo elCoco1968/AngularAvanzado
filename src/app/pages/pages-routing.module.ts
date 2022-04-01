@@ -8,14 +8,14 @@ import { Grafica1Component } from './grafica1/grafica1.component';
 const routes: Routes = [
   //Rutas hijas
   {
-    path: '',
+    //Tener en cuenta, la ruta padre en este caso es dashboard, los hijos dependen de ella, entonces se concatenaran a su extension
+    path: 'dashboard',
     component: PagesComponent,
     //con children creamos las rutas hijas a partir de un componente padre
     children: [
-      { path: 'dashboard', component: DashboardComponent },
+      { path: '', component: DashboardComponent },
       { path: 'progress', component: ProgressComponent },
       { path: 'grafica1', component: Grafica1Component },
-      { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
     ]
   },
 ];

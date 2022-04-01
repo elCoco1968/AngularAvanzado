@@ -3,23 +3,19 @@ import { NgModule } from '@angular/core';
 // import { CommonModule } from '@angular/common';
 //El router para poder movernos entre rutas
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
 import { NopagefoundComponent } from './nopagefound/nopagefound.component';
-
 import { PagesRoutingModule } from './pages/pages-routing.module';
+import { AuthRoutingModule } from './auth/auth-routing.module';
 //configuramos las rutas de nuestra aplicacion
 //luego de configurar las rutas debemos importarlas en el imports
 
 const routes: Routes = [
-  {path: 'register', component: RegisterComponent},
-  {path: 'login', component: LoginComponent},
-  //Ruta innexistente nos redirige al dashboard
-  {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
+  //path: 'dashboard' PagesRouting
+  //path: 'auth' AuthRouting
   //Ruta que sea errada que no sea ninguna de las que estamos declarando
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   {path: '**', component: NopagefoundComponent}
 ];
-
 
 
 @NgModule({
@@ -28,7 +24,8 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes),
     //TODO: aca importamos nuestro routing realizado en las pages
-    PagesRoutingModule
+    PagesRoutingModule,
+    AuthRoutingModule,
   ],
   exports: [ RouterModule]
 })
