@@ -32,7 +32,7 @@ import { ComponentsModule } from '../components/components.module';
     SharedModule,
     //para no importarl el appRoutingModule dos veces utilizamos el routerModule
     RouterModule,
-    ComponentsModule
+    ComponentsModule,
   ]
 })
 export class PagesModule { }

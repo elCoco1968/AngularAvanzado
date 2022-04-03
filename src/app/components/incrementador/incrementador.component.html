@@ -1,14 +1,14 @@
 <div class="input-group">
     <span class="input-group-btn">
-        <button [ngClass]="btnClass"  (click)="cambiarValor(-5)" type="button">
+        <button [ngClass]="btnClass" (click)="cambiarValor(-5)" type="button">
             <i class="fa fa-minus"></i>
         </button>
     </span>
     <!-- el ngModelChange, nos permite leer cambios -->
     <!-- detectamos cambios y los mandamos la funcion de onChange mediante ($event) -->
+    <!-- tambien le a;adimos una clase en caso de que progreso sea menor a 0 o mayor de 100 -->
     <input min="0" max="100" type="number" class="form-control" placeholder="Product name"
-    (ngModelChange)="onChange( $event )"   
-    [(ngModel)]="progreso">
+        (ngModelChange)="onChange( $event )" [(ngModel)]="progreso" [ngClass]="{'is-invalid': progreso > 100 || progreso < 0}">
     <span class="input-group-btn">
         <!-- Para modificar la clase desde el componente padre, utilizamos [ngClass] y una variable la cual es un input que pusimos en el TS -->
         <button [ngClass]="btnClass" (click)="cambiarValor(5) " type="button">
