@@ -20,12 +20,17 @@
                 </li>
                 <li class="nav-devider"></li>
                 <li class="nav-small-cap">PERSONAL</li>
-                <li *ngFor="let item of menuItems"> 
+                <li *ngFor="let item of menuItems">
                     <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
                             class="mdi mdi-gauge"></i><span class="hide-menu">{{item.titulo}}<span
                                 class="label label-rouded label-themecolor pull-right">{{item.submenu.length}}</span></span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <li *ngFor="let subItem of item.submenu"><a routerLink="{{subItem.url}}"> {{subItem.titulo}}</a></li>
+                        <li *ngFor="let subItem of item.submenu">
+                            <!-- Utilizamos el router linkActivate para que cuando lo seleccionemos-->
+                            <!-- y el routerlinkActiveOptions para que las coincidencias sean exactas y no nos seleccione el main -->
+                            <a routerLink="{{subItem.url}}" routerLinkActive="active"
+                                [routerLinkActiveOptions]="{exact : true}"> {{subItem.titulo}}</a>
+                        </li>
                     </ul>
                 </li>
             </ul>
