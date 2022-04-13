@@ -11,3 +11,7 @@ la ruta de animados, y el primero*/
 .selector{
     cursor: pointer;
 }
+
+.fondo{
+    background-color: rgb(43, 43, 43);
+}

@@ -26,7 +26,6 @@ const routes: Routes = [
   },
 ];
 
-
 @NgModule({
   //forchild nos indica que son rutas hijas
   imports: [RouterModule.forChild(routes)],
