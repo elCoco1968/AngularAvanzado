@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import Swal from 'sweetalert2'
+import { UsuarioService } from 'src/app/services/usuario.service';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -10,16 +14,18 @@ export class RegisterComponent{
 
   public formSubmitted = false;
   
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,
+    private usuarioService : UsuarioService,
+    private router: Router) { }
 
 
 
   public registerForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(3)]],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['147', Validators.required],
-      password2: ['144', Validators.required],
-      terminos: [false, Validators.required],
+      name: ['Kevin Morales Gomez', [Validators.required, Validators.minLength(3)]],
+      email: ['kevin@gmail.com', [Validators.required, Validators.email]],
+      password: ['123', Validators.required],
+      password2: ['123', Validators.required],
+      terminos: [true, Validators.required],
   },{
     //validacion personalizada
     Validators: this.passwordsIguales('password', 'password2')
@@ -31,12 +37,23 @@ export class RegisterComponent{
     console.log(this.registerForm.value)
     const terminos = this.registerForm.get('terminos')
 
-    if( this.registerForm.valid && this.aceptaTerminos){
-      console.log('Posteando formulario');
-    } else {
-      console.log('Formulario no es correcto...')
-    }
+    if( this.registerForm.invalid){
+      return;
+    } 
+
+    //Conectamos con el servicio creado
+    this.usuarioService.crearUsuario( this.registerForm.value)
+        .subscribe( resp => {
+          console.log('usuario creado');
+            //navegar al dashboard
+            this.router.navigate(['/dashboard'])
+          //accedemos directamente al msg del servidor, el msg de error
+        }, (err) => {
+          //si sucede un error
+          Swal.fire('Error', err.error.mgs, 'error')
+        })
   }
+
 
   campoNoValido( campo: string): boolean{
 
@@ -79,9 +96,6 @@ export class RegisterComponent{
         pass2Control?.setErrors({ noEsIgual : true})
       }
     }
-
-
-
   }
  
 }

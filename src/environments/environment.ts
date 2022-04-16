@@ -2,8 +2,14 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+
+
+//TODO: CAMBIAR IRL DE SERVICIOS EN PRODUCCION
+
 export const environment = {
-  production: false
+  production: false,
+  //aca realizamos las peticiones a nuestro servicio
+  base_url: 'http://localhost:3000/api'
 };
 
 /*

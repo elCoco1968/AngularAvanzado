@@ -7,6 +7,7 @@ import { Grafica1Component } from './grafica1/grafica1.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
+import { AuthGuard } from '../guards/auth.guard';
 
 const routes: Routes = [
   //Rutas hijas
@@ -14,6 +15,8 @@ const routes: Routes = [
     //Tener en cuenta, la ruta padre en este caso es dashboard, los hijos dependen de ella, entonces se concatenaran a su extension
     path: 'dashboard',
     component: PagesComponent,
+    //Implementando el guard canAcivate
+    canActivate: [ AuthGuard],
     //con children creamos las rutas hijas a partir de un componente padre
     children: [
       { path: '', component: DashboardComponent, data: {titulo: 'Dashboard'}},

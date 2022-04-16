@@ -42,4 +42,4 @@ import { RxjsComponent } from './rxjs/rxjs.component';
     ComponentsModule,
   ]
 })
-export class PagesModule { }
+export class PagesModule {}
