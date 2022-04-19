@@ -29,7 +29,6 @@ export class AuthGuard implements CanActivate {
             })
           )
 
-
       //este bloque es como si estuviera comentado
       //con esto nos valida el token
       this.usuarioService.validarToken().subscribe( resp => {
