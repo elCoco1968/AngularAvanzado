@@ -1,27 +1,30 @@
-
 <div class="row">
     <div class="col-md-6">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Sample Form with the Icons</h4>
                 <h6 class="card-subtitle">made with bootstrap elements</h6>
-                <form [formGroup]="myForm" (ngSubmit)="actualizarPerfil()" class="form p-t-20">
+                <form [formGroup]="perfilForm" (ngSubmit)="actualizarPerfil()" class="form p-t-20">
                     <div class="form-group">
                         <label for="exampleInputuname">User Name</label>
                         <div class="input-group">
                             <div class="input-group-addon"><i class="ti-user"></i></div>
-                            <input formControlName="name" type="text" class="form-control" id="exampleInputuname" placeholder="Nombre del usuario">
+                            <input formControlName="name" type="text" class="form-control" id="exampleInputuname"
+                                placeholder="Nombre del usuario">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email address</label>
                         <div class="input-group">
                             <div class="input-group-addon"><i class="ti-email"></i></div>
-                            <input formControlName="email" type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                            <input formControlName="email" type="email" class="form-control" id="exampleInputEmail1"
+                                placeholder="Enter email">
                         </div>
                     </div>
-                
-                    <button [disabled]="myForm.invalid"  class="btn btn-block btn-success waves-effect waves-light m-r-10"><i class="fa fa-save"></i> Guardar cambios </button>
+
+                    <button [disabled]="perfilForm.invalid"
+                        class="btn btn-block btn-success waves-effect waves-light m-r-10"><i class="fa fa-save"></i>
+                        Guardar cambios </button>
                 </form>
             </div>
         </div>
@@ -33,15 +36,27 @@
                 <h4 class="card-title">Avatar</h4>
                 <h6 class="card-subtitle">Imagen del usuario</h6>
 
-                <img src="">
+                <div class="img-container text-center">
+                    <!-- Mostrando la imagen -->
+                    <!-- Validando si la imagen temporal existe muestre esa y si no la normal-->
+                    <img *ngIf="!imagenTemp" [src]="usuario?.imagenUrl" class="img-avatar">
+                    <img *ngIf="imagenTemp" [src]="imagenTemp" class="img-avatar">
+                </div>
 
-                <input type="file">
+                <!-- normalmente ya tenemos capturado el evento pero debemos acceder directamente al file -->
+                <input id="pruebaImg" type="file" (change)="cambiarImagen($event)">
 
                 <br>
                 <br>
 
-                <button type="button" class="btn btn-block btn-success waves-effect waves-light m-r-10"><i class="fa fa-save"></i> Cambiar imagen </button>
-           </div>
+                <button [disabled]="!imagenSubir" (click)="subirImagen()" type="button"
+                    class="btn btn-block btn-success waves-effect waves-light m-r-10"><i class="fa fa-save"></i> Cambiar
+                    imagen </button>
+
+                <button [disabled]="disabled" class="btn btn-block btn-success waves-effect waves-light m-r-10"
+                    (click)="cancelarImagen()">Regresar imagen</button>
+                    
+            </div>
         </div>
     </div>
 </div>

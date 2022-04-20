@@ -66,7 +66,7 @@ export class UsuarioService {
           uid,
           img
         } = resp.usuario
-        this.usuario = new Usuario( name,email, '',img ,uid , role, google);
+        this.usuario = new Usuario( name,email, '',img , google,role, uid);
         localStorage.setItem('token', resp.token);
         return true;
       }),
@@ -99,10 +99,7 @@ export class UsuarioService {
       role: this.usuario?.role
     }
 
-    console.log(this.usuario?.google)
-    
-    
-    return this.http.put(`${base_url}/usuarios/${this.usuario?.uid}`,data, { headers:{'x-token': this.token}})
+    return this.http.put(`${base_url}/usuarios/${this.uid}`,data, { headers:{'x-token': this.token}})
   }
 
   login(formData: loginForm) {
@@ -112,7 +109,6 @@ export class UsuarioService {
         //el tab siempre recibe la respuesta del servidor
         tap((resp: any) => {
           localStorage.setItem('token', resp.token)
-
         })
       )
   }
