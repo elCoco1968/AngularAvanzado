@@ -16,12 +16,20 @@ export class SidebarService {
         { titulo: 'Graficas', url: 'grafica1' },
         { titulo: 'Promesas', url: 'promesas' },
         { titulo: 'rxjs', url: 'rxjs' },
-
       ]
-    }
+    },
 
+    {
+      //generamos el menu de manera dinamica
+      titulo: 'Mantenimientos',
+      icono: 'mdi mdi-folder-lock-open',
+      submenu: [
+        { titulo: 'Usuarios', url: 'usuarios' },
+        { titulo: 'Hospitales', url: 'hospitales' },
+        { titulo: 'Medicos', url: 'medicos' }
+      ]
+    },
   ]
-
 
 
   constructor() { }

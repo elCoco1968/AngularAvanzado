@@ -6,9 +6,10 @@ import { loginForm } from '../interfaces/login-form.interface';
 import { RegisterForm } from '../interfaces/register-form.interface';
 
 //Anadirle un paso adicional a nuestro subscrpibe u observable
-import { catchError, map, Observable, of, tap } from 'rxjs';
+import { catchError, delay, map, Observable, of, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { Usuario } from '../models/usuario.model';
+import { CargarUsuario } from '../interfaces/cargar-usuaros.interface';
 
 
 const base_url = environment.base_url;
@@ -40,6 +41,14 @@ export class UsuarioService {
 
   get uid(): string{
     return this.usuario?.uid || '';
+  }
+
+  get headers(){
+    return {
+      headers: {
+        'x-token': this.token
+      }
+    }
   }
 
   // de esta manera validaremos el token
@@ -90,9 +99,6 @@ export class UsuarioService {
       )
   }
 
-
-
-
   actualizarPerfil( data: { email: string, nombre: string, role?: string}){
     data = {
       ...data,
@@ -112,4 +118,39 @@ export class UsuarioService {
         })
       )
   }
+
+  //cargar usuarios por medio de paginacion
+  cargarUsuarios(desde : number = 0){
+
+    const url = `${ base_url }/usuarios?desde=${desde}`
+    //esta es la forma creando interfaz
+    return this.http.get<CargarUsuario>( url , this.headers )
+                    .pipe(
+                      //delay que espere 5 segundos antes de emitir el valor
+                      delay(500),
+                      map( resp => {
+
+                        const usuarios = resp.usuarios.map(
+                           (user : any) => new Usuario(user.name, user.email, '', user.img, user.google, user.role, user.uid))
+
+
+                        return{
+                          total: resp.total,
+                          usuarios
+                        };
+                      })
+                    )
+    //es otra forma, de indicarle que es lo que vamos a devolver, la otra opcion es realizar una interfaz
+    //return this.http.get<{total: Number, usuarios:Usuario[]}>( url , this.headers );
+  }
+
+  eliminarUsuario(id: string){
+
+    //http://localhost:3000/api/usuarios/62524f84d7240cb1bcfe6275
+    return this.http.delete(`${base_url}/usuarios/${id}`, {headers:{'x-token': this.token}})
+  }
+
+
+  //TODO:  2 -> 55136679 - 1 -> 54608583
+  
 }

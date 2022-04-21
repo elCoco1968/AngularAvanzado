@@ -19,8 +19,16 @@ la ruta de animados, y el primero*/
 }
 
 .img-avatar{
-
     width: 200px;
-    height: 200ox;
-    
+    height: 200ox; 
+}
+
+/*Estilo de tabla usuarios*/
+.w100{
+    width: 100px;
+}
+
+.avatar{
+    width: 30px;
+    border-radius: 100%;
 }
