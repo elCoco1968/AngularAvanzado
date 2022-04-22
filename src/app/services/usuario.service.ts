@@ -100,10 +100,10 @@ export class UsuarioService {
   }
 
   actualizarPerfil( data: { email: string, nombre: string, role?: string}){
-    data = {
-      ...data,
-      role: this.usuario?.role
-    }
+     data = {
+       ...data,
+       role: this.usuario?.role
+     }
 
     return this.http.put(`${base_url}/usuarios/${this.uid}`,data, { headers:{'x-token': this.token}})
   }
@@ -144,13 +144,22 @@ export class UsuarioService {
     //return this.http.get<{total: Number, usuarios:Usuario[]}>( url , this.headers );
   }
 
-  eliminarUsuario(id: string){
+  eliminarUsuario(usuario: Usuario){
 
     //http://localhost:3000/api/usuarios/62524f84d7240cb1bcfe6275
-    return this.http.delete(`${base_url}/usuarios/${id}`, {headers:{'x-token': this.token}})
+    return this.http.delete(`${base_url}/usuarios/${usuario.uid}`, {headers:{'x-token': this.token}})
   }
 
+  
+  //TODO:  2 -> 55136679 - 1 -> 54608583  solo arl -> 55577193
+  // Todo, arl salud y pension ->  55576873
 
-  //TODO:  2 -> 55136679 - 1 -> 54608583
+
+  //guardar usuario actualizado (en este caso puntual actualizamos el rol)
+  guardarUsuario( usuario: Usuario){
+
+    return this.http.put(`${base_url}/usuarios/${usuario.uid}`,usuario, this.headers)
+  }
+
   
 }

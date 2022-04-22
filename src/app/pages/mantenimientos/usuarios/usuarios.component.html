@@ -40,7 +40,7 @@
                                 <th class="w100">Avatar</th>
                                 <th>Correo</th>
                                 <th>Nombre</th>
-                                <th class="w100">Role</th>
+                                <th class="w140">Role</th>
                                 <th class="w100">Auth</th>
                                 <th class="text-nowrap w100">Acciones</th>
                             </tr>
@@ -49,11 +49,22 @@
                             <tr *ngFor="let usuario of usuarios">
                                 <!-- Insertando imagen -->
                                 <td class="text-center">
-                                    <img [src]="usuario.imagenUrl" class="avatar" alt="Avatar de Usuario">
+                                    <img [src]="usuario.imagenUrl" 
+                                    class="avatar selector" 
+                                    alt="Avatar de Usuario"
+                                    (click)="abrirModal(usuario)">
                                 </td>
                                 <td>{{usuario.email}}</td>
                                 <td>{{usuario.name}}</td>
-                                <td>{{usuario.role}}</td>
+                                <td>
+                                    <!-- Generando los cambios de rol, selecciones y que notifique el cambio con el change-->
+                                    <select class="form-control w140"
+                                         [(ngModel)]="usuario.role"
+                                         (change)="cambiarRole( usuario )">
+                                        <option value="ADMIN_ROLE">Admin</option>
+                                        <option value="USER_ROLE">User</option>
+                                    </select>
+                                </td>
                                 <td>
                                     <span *ngIf="usuario.google" class="label label-danger">Google</span>
                                     <span *ngIf="!usuario.google" class="label label-info">Email</span>

@@ -27,8 +27,27 @@ la ruta de animados, y el primero*/
 .w100{
     width: 100px;
 }
+/*Estilo de input selector*/
+.w140{
+    width: 140px;
+}
 
 .avatar{
     width: 30px;
     border-radius: 100%;
+}
+
+/*css de moda*/
+.fondo-modal-imagen{
+    background-color: rgba(0, 0, 0, 0.4);
+    left: 0px;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    z-index: 99;
+}
+
+.oculto{
+    display: none;
 }
