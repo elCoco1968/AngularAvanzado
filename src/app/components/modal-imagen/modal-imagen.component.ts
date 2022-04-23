@@ -62,7 +62,7 @@ export class ModalImagenComponent implements OnInit {
     //Muy importante el simbolo TODO:!!!!!!!!!!!
     .then( img => {
     
-      Swal.fire('Guardado', 'Imagen de usuario actualizada', 'success')
+      Swal.fire('Guardado', `Imagen de ${tipo} actualizada`, 'success')
 
       //vamos a emitirle a nuestro modalService la img que agregamos
       this.modalImagenService.nuevaImagen.emit(img)

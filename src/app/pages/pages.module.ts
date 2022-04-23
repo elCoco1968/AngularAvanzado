@@ -13,6 +13,9 @@ import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component';
+import { HospitalesComponent } from './mantenimientos/hospitales/hospitales.component';
+import { MedicosComponent } from './mantenimientos/medicos/medicos.component';
+import { PipesModule } from '../pipes/pipes.module';
 
 
 
@@ -27,7 +30,9 @@ import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component'
     PromesasComponent,
     RxjsComponent,
     PerfilComponent,
-    UsuariosComponent
+    UsuariosComponent,
+    HospitalesComponent,
+    MedicosComponent
   ],
   //debemos crear el exports si no lo hacemos no reconocera nada, fuera del modulo
   exports:[
@@ -45,6 +50,8 @@ import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component'
     //para no importarl el appRoutingModule dos veces utilizamos el routerModule
     RouterModule,
     ComponentsModule,
+    //los pipes son modulos entonces se importan en los inputs
+    PipesModule
   ]
 })
 export class PagesModule {}

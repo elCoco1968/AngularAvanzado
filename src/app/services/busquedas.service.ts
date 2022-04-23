@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Hospital } from '../models/hospital.model';
 import { Usuario } from '../models/usuario.model';
 
 
@@ -13,13 +14,13 @@ const base_url = environment.base_url;
 })
 export class BusquedasService {
 
-  constructor( private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   get token(): string {
     return localStorage.getItem('token') || '';
   }
 
-  get headers(){
+  get headers() {
     return {
       headers: {
         'x-token': this.token
@@ -28,31 +29,44 @@ export class BusquedasService {
   }
 
   //para el iltrado que aparezca con imagen
-  private transformarUsuarios( resultados: any[] ){
+  private transformarUsuarios(resultados: any[]) {
     return resultados.map(
-      user => new Usuario(user.name, user.email, '',user.img,user.google,user.role,user.uid)
+      user => new Usuario(user.name, user.email, '', user.img, user.google, user.role, user.uid)
     )
   }
 
-  buscar(tipo: 'usuarios'|'medicos'|'hospitales',
-  termino: string  ){
+  private transformarHospitales(resultados: any[]): Hospital[] {
+    return resultados
+    
+  }
 
-    const url = `${ base_url }/todo/coleccion/${tipo}/${termino}`;
-    return this.http.get<any[]>( url, this.headers)
-              .pipe(
-                map( (resp: any) => {
 
-                  //para el filtrado con la imagen
-                  switch (tipo) {
-                    case 'usuarios':
-                      return this.transformarUsuarios( resp.resultados )
-                      break;
-                  
-                    default:
-                      return [];
-                  }
-                })
-              )
+
+
+  buscar(tipo: 'usuarios' | 'medicos' | 'hospitales',
+    termino: string) {
+
+    const url = `${base_url}/todo/coleccion/${tipo}/${termino}`;
+    return this.http.get<any[]>(url, this.headers)
+      .pipe(
+        map((resp: any) => {
+
+          //para el filtrado con la imagen
+          switch (tipo) {
+            case 'usuarios':
+              return this.transformarUsuarios(resp.resultados)
+              break;
+            case 'hospitales':
+              return this.transformarHospitales(resp.resultados)
+              break;
+            case 'medicos':
+              return resp.resultados
+              break;
+            default:
+              return [];
+          }
+        })
+      )
   }
 
 

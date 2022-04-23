@@ -43,7 +43,7 @@ export class UsuariosComponent implements OnInit, OnDestroy {
     this.imgSubs = this.modalImagenService.nuevaImagen.pipe
     (
       //con este delay es suficiente para quealcance a llegar la imagen
-      delay(100)
+      delay(500)
     ).subscribe( img => {
       
       this.cargarUsuarios()
