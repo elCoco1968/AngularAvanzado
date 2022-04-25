@@ -16,6 +16,8 @@ import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component'
 import { HospitalesComponent } from './mantenimientos/hospitales/hospitales.component';
 import { MedicosComponent } from './mantenimientos/medicos/medicos.component';
 import { PipesModule } from '../pipes/pipes.module';
+import { MedicosUpdateComponent } from './mantenimientos/medicos/medicos-update.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 
@@ -32,7 +34,8 @@ import { PipesModule } from '../pipes/pipes.module';
     PerfilComponent,
     UsuariosComponent,
     HospitalesComponent,
-    MedicosComponent
+    MedicosComponent,
+    MedicosUpdateComponent
   ],
   //debemos crear el exports si no lo hacemos no reconocera nada, fuera del modulo
   exports:[
@@ -51,7 +54,8 @@ import { PipesModule } from '../pipes/pipes.module';
     RouterModule,
     ComponentsModule,
     //los pipes son modulos entonces se importan en los inputs
-    PipesModule
+    PipesModule,
+    MatTooltipModule
   ]
 })
 export class PagesModule {}

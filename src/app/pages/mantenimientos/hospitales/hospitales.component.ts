@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { delay, Subscription } from 'rxjs';
 import { Hospital } from 'src/app/models/hospital.model';
 import { BusquedasService } from 'src/app/services/busquedas.service';
@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
   templateUrl: './hospitales.component.html',
   styles: []
 })
-export class HospitalesComponent implements OnInit {
+export class HospitalesComponent implements OnInit, OnDestroy {
 
 
   public hospitales: Hospital[] = [];
@@ -23,6 +23,11 @@ export class HospitalesComponent implements OnInit {
   constructor(private hospitalesServices: HospitalService,
               private modalImagenService: ModalImagenService,
               private busquedasService: BusquedasService) { }
+
+  //para cuando se destruya deje de escuchar los cambios, para prevenir fuga de memoria y tener varios listener escuchadno lo msimo
+  ngOnDestroy(): void {
+    this.imgSubs?.unsubscribe();
+  }
 
   ngOnInit(): void {
     this.cargarHospitales();
