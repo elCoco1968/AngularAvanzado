@@ -13,6 +13,7 @@ import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component'
 import { HospitalesComponent } from './mantenimientos/hospitales/hospitales.component';
 import { MedicosComponent } from './mantenimientos/medicos/medicos.component';
 import { MedicosUpdateComponent } from './mantenimientos/medicos/medicos-update.component';
+import { BusquedaComponent } from './busqueda/busqueda.component';
 
 const routes: Routes = [
   //Rutas hijas
@@ -28,6 +29,7 @@ const routes: Routes = [
       { path: 'progress', component: ProgressComponent, data: {titulo: 'ProgressBar'} },
       { path: 'grafica1', component: Grafica1Component, data: {titulo: 'Grafica 1'} },
       { path: 'account-settings', component: AccountSettingsComponent, data: {titulo: 'Ajustes de cuenta'} },
+      { path: 'buscar/:termino', component: BusquedaComponent, data: {titulo: 'Busqueda'} },
       { path: 'promesas', component: PromesasComponent, data: {titulo: 'Promesas'}},
       { path: 'rxjs', component: RxjsComponent, data: {titulo: 'RXJS'}},
       { path: 'myperfil', component: PerfilComponent , data: {titulo: 'Perfil Usuario'} },

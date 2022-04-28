@@ -23,6 +23,10 @@ la ruta de animados, y el primero*/
     height: 200ox; 
 }
 
+.w75{
+    width: 75px;
+}
+
 /*Estilo de tabla usuarios*/
 .w100{
     width: 100px;
@@ -54,3 +58,5 @@ la ruta de animados, y el primero*/
 .oculto{
     display: none;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

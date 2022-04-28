@@ -18,6 +18,7 @@ import { MedicosComponent } from './mantenimientos/medicos/medicos.component';
 import { PipesModule } from '../pipes/pipes.module';
 import { MedicosUpdateComponent } from './mantenimientos/medicos/medicos-update.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { BusquedaComponent } from './busqueda/busqueda.component';
 
 
 
@@ -35,7 +36,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     UsuariosComponent,
     HospitalesComponent,
     MedicosComponent,
-    MedicosUpdateComponent
+    MedicosUpdateComponent,
+    BusquedaComponent
   ],
   //debemos crear el exports si no lo hacemos no reconocera nada, fuera del modulo
   exports:[

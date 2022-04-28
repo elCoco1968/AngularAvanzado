@@ -32,7 +32,10 @@ export class UsuarioService {
   //funcion para cerrar seccion
   logout(){
     localStorage.removeItem('token');
-    this.router.navigateByUrl('/login')
+
+    //TODO: Borrar menu
+
+    this.router.navigateByUrl('/login');
   }
 
   get token(): string {
@@ -76,7 +79,10 @@ export class UsuarioService {
           img
         } = resp.usuario
         this.usuario = new Usuario( name,email, '',img , google,role, uid);
-        localStorage.setItem('token', resp.token);
+        //localStorage.setItem('token', resp.token);
+        //tambien vamos a grabar el menu acorde a su role
+        //localStorage.setItem('menu', resp.menu);
+        this.guardarLocalStorage( resp.token, resp.menu);
         return true;
       }),
       //obtenemos el token por medio de tap pero necesitamos trasnformarlo en boolean por medio de map
@@ -93,7 +99,9 @@ export class UsuarioService {
       .pipe(
         //el tab siempre recibe la respuesta del servidor
         tap((resp: any) => {
-          localStorage.setItem('token', resp.token)
+          //localStorage.setItem('token', resp.token);
+          //localStorage.setItem('menu', resp.menu);
+          this.guardarLocalStorage( resp.token, resp.menu);
 
         })
       )
@@ -148,6 +156,13 @@ export class UsuarioService {
 
     //http://localhost:3000/api/usuarios/62524f84d7240cb1bcfe6275
     return this.http.delete(`${base_url}/usuarios/${usuario.uid}`, {headers:{'x-token': this.token}})
+  }
+
+  guardarLocalStorage( token: string, menu : any){
+    localStorage.setItem('token', token);
+    //En el local storage no podemos grabar objetos, ni nada de eso,
+    //solo podemos guardar strings para eso lo pasamos por el json.stringify
+    localStorage.setItem('menu', JSON.stringify(menu));
   }
 
   

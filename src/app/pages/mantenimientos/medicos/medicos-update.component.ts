@@ -107,6 +107,7 @@ export class MedicosUpdateComponent implements OnInit {
       }
       this.medicoService.actualizarMedico(data)
           .subscribe(resp =>{
+            this.router.navigateByUrl('dashboard/medicos')
             Swal.fire('Actualizado', `${ name} Actualizado correctamente`, 'success' );
           })
 
