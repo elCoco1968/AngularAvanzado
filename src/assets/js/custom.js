@@ -6,8 +6,8 @@ File: js
 */
 
 
-//metimos todo el JQuery en la constante que creamos y luego la vamos a llamar en nuestro app component, o pages component
-//para que se vuelva a disparar todo esto y no perdamos los estilos
+//TODO:metimos todo el JQuery en la constante que creamos y luego la vamos a llamar en nuestro app component, o pages component
+//para que se vuelva a disparar todo esto y no perdamos los estilosTODO:
 const customInitFunctions = () => {
     $(function() {
         "use strict";

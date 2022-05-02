@@ -25,9 +25,7 @@ export class UsuarioService {
 
   public usuario?: Usuario;
 
-
   constructor(private http: HttpClient, private router:Router) { }
-
 
   //funcion para cerrar seccion
   logout(){
@@ -44,6 +42,10 @@ export class UsuarioService {
 
   get uid(): string{
     return this.usuario?.uid || '';
+  }
+
+  get role(): any{
+    return this.usuario?.role;
   }
 
   get headers(){
@@ -99,10 +101,8 @@ export class UsuarioService {
       .pipe(
         //el tab siempre recibe la respuesta del servidor
         tap((resp: any) => {
-          //localStorage.setItem('token', resp.token);
-          //localStorage.setItem('menu', resp.menu);
-          this.guardarLocalStorage( resp.token, resp.menu);
-
+          localStorage.setItem('token', resp.token);
+          localStorage.setItem('menu', JSON.stringify(resp.menu));
         })
       )
   }
@@ -123,6 +123,7 @@ export class UsuarioService {
         //el tab siempre recibe la respuesta del servidor
         tap((resp: any) => {
           localStorage.setItem('token', resp.token)
+          localStorage.setItem('menu', JSON.stringify(resp.menu));
         })
       )
   }
@@ -158,17 +159,17 @@ export class UsuarioService {
     return this.http.delete(`${base_url}/usuarios/${usuario.uid}`, {headers:{'x-token': this.token}})
   }
 
+
+  //TODO: Este metodo no nos funciono toco implementarlo de forma aparte en el login que, me respondiera con el menu y el token
   guardarLocalStorage( token: string, menu : any){
     localStorage.setItem('token', token);
     //En el local storage no podemos grabar objetos, ni nada de eso,
     //solo podemos guardar strings para eso lo pasamos por el json.stringify
-    localStorage.setItem('menu', JSON.stringify(menu));
+    //localStorage.setItem('menu', JSON.stringify("TEST"));
   }
 
-  
   //TODO:  2 -> 55136679 - 1 -> 54608583  solo arl -> 55577193
   // Todo, arl salud y pension ->  55576873
-
 
   //guardar usuario actualizado (en este caso puntual actualizamos el rol)
   guardarUsuario( usuario: Usuario){
